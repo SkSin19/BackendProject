@@ -1,0 +1,16 @@
+{
+  "name": "backend-full-poject",
+  "version": "1.0.0",
+  "description": "first real  backend project",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "license": "ISC",
+  "author": "Saksham Sinha",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
