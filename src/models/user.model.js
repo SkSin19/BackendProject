@@ -4,15 +4,7 @@ import bcrypt from "bcrypt"
 
 const userSchema = new Schema(
     {
-        userName: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true,
-            index: true,
-        },
-
+        
         email: {
             type: String,
             required: true,
@@ -28,23 +20,6 @@ const userSchema = new Schema(
             index: true,
         },
 
-        avatar: {
-            type: String,         //cloudinary url
-            required: true,
-        },
-
-        coverimage: {
-            type: String,
-            required: false,
-        },
-
-        watchHistory: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Video"
-            }
-        ],
-
         password: {
             type: String,
             required: [true, "Password is Requried"],
@@ -52,15 +27,16 @@ const userSchema = new Schema(
 
         refreshToken: {
             type: String,
-        }
+        },
+
     },
  {timestamps: true})
 
- userSchema.pre("Save", async function (next) {
+ userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
-    this.passwrd = bcrypt.hash(this.password, 10)
-    next()
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
     
  })
 
